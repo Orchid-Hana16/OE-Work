@@ -8,18 +8,18 @@
 <meta name="description" content="Apresentação interativa de literatura: conto “Maria”, de Conceição Evaristo, e uma crônica de Luís Fernando Veríssimo, pelo método P.E.N.T.E.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Orbitron:wght@400..900&family=Pangolin&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#2a2622;--cream:#f3ead8;--paper:#e9dfcb;--spark:#e8735a;--spark-d:#b9472f;--cloth:#2c5653;--ui:#f7f0e2;--pix:'Pixelify Sans',ui-monospace,monospace;--hand:'Gaegu','Comic Sans MS',cursive;
+:root{--ink:#2a2622;--cream:#f3ead8;--paper:#e9dfcb;--spark:#e8735a;--spark-d:#b9472f;--cloth:#536f89;--ui:#f7f0e2;--pix:'Pixelify Sans',ui-monospace,monospace;--hand:'M PLUS Rounded 1c',Arial,sans-serif;
  --rag:url(https://www.vividsites.app/media/flagship/foldworld/tex/rag.jpg)}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:#e6d8be;color:var(--ui);-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;background:#e5edf3;color:var(--ui);-webkit-tap-highlight-color:transparent}
 body{font-family:var(--hand);overscroll-behavior:none;touch-action:none;-webkit-font-smoothing:antialiased}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* palco */
-#stage{position:fixed;inset:0;transform-origin:50% 50%;transition:transform .9s cubic-bezier(.7,0,.2,1),border-radius .9s;overflow:hidden;background:#e6d8be}
+#stage{position:fixed;inset:0;transform-origin:50% 50%;transition:transform .9s cubic-bezier(.7,0,.2,1),border-radius .9s;overflow:hidden;background:#e5edf3}
 #gl{position:absolute;inset:0;width:100%;height:100%;display:block;outline:none}
-#still{position:absolute;inset:0;background:linear-gradient(#e6d8be,#e6d8be);display:none}
+#still{position:absolute;inset:0;background:linear-gradient(#e5edf3,#e5edf3);display:none}
 #still p{position:absolute;left:50%;top:42%;transform:translateX(-50%);background:var(--cream);color:var(--ink);font:700 20px/1.25 var(--hand);padding:12px 20px;border-radius:3px;text-align:center;width:max-content;max-width:86vw}
 html.nogl #still{display:block}html.nogl #gl,html.nogl #zoom,html.nogl #hint{display:none}
 #frame{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:40}
@@ -114,7 +114,7 @@ html.swing .shade{opacity:.55}html.open #cover{display:none}
 .cnav button:disabled{opacity:.3;cursor:default}
 .x{position:absolute;right:10px;top:10px;width:34px;height:34px;border-radius:50%;background:var(--cream);color:var(--ink);font:600 16px/1 var(--pix);z-index:3}
 /* colofão */
-#colophon{position:fixed;inset:0;z-index:30;background:#d9cdb5 var(--rag) 0 0/420px;pointer-events:none;opacity:0;transition:opacity .5s}
+#colophon{position:fixed;inset:0;z-index:30;background:#dce6ed var(--rag) 0 0/420px;pointer-events:none;opacity:0;transition:opacity .5s}
 #colophon .txt{position:absolute;left:58%;top:50%;transform:translateY(-50%);width:min(560px,38vw);max-height:88vh;overflow:auto;color:var(--ink);opacity:0;transition:opacity .5s .35s}
 #colophon h2{font:600 40px/1 var(--pix);margin-bottom:16px}#colophon h2 i{font-style:normal;color:var(--spark)}
 #colophon p{font:700 20px/1.25 var(--hand);margin-bottom:11px}#colophon p em{font-style:normal;color:var(--spark-d)}
@@ -256,7 +256,7 @@ html.colo .pc{opacity:.88}html.nogl .pc{display:none}
 <script src="secoes.js"></script>
 <!-- paleta fria nos ambientes / quente nos detalhes (sobrepõe as cores de conteudo.js sem alterá-lo) -->
 <script>
-(function(){var W=['#e2bb9b','#b9c5a1','#d8a9a2','#d4ba97','#aab998','#bb9779','#dcc2ad'],F=['#eadabd','#dbd1b0','#e6cfbf','#e3d4b6','#d0d5b5','#e7d4c5','#ebdfc7'],I=['#7a4a2a','#4f6a3e','#8a4a44','#7d5a30','#4b6240','#6a4a34','#8a5a3a'],bs=window.CONTENT.bays;
+(function(){var W=['#c2d2e0','#c8d9e5','#bfcfdf','#cedce7','#bfd2df','#c9d8e5','#c1d1e0'],F=['#e1e8ed','#e5e5e0','#dce5eb','#e5e8eb','#d9e3e8','#e0e7eb','#e4e9ed'],I=['#49647d','#4d6b82','#465f78','#536b80','#46677a','#4e687f','#49647d'],bs=window.CONTENT.bays;
 while(bs.length<7)bs.push({});bs.forEach(function(b,i){b.wall=W[i%7];b.floor=F[i%7];b.ink=I[i%7]})})();
 </script>
 
@@ -479,7 +479,7 @@ function desk(x,z,w=1.2){const g=new THREE.Group(),t=box(w,.045,.46,'#e5d8bf');t
 /* placas penduradas com o título de cada seção */
 function signTex(s,ink){return ctex(640,440,(x,w,h)=>{x.fillStyle='#ece2cd';x.fillRect(0,0,w,h);x.strokeStyle='rgba(42,38,34,.32)';x.lineWidth=3;x.strokeRect(18,18,w-36,h-36);
  x.fillStyle='#b9472f';x.font='500 26px "Pixelify Sans"';x.fillText('SEÇÃO '+s.num,44,76);x.fillStyle=ink;x.font='600 44px "Pixelify Sans"';const y=wrap(x,s.short,44,140,550,52);
- x.fillStyle='#e8735a';x.fillRect(44,y-30,100,6);x.fillStyle='#2a2622';x.font='700 32px "Gaegu"';wrap(x,s.sub,44,y+22,550,38)})}
+ x.fillStyle='#e8735a';x.fillRect(44,y-30,100,6);x.fillStyle='#2a2622';x.font='700 32px "M PLUS Rounded 1c"';wrap(x,s.sub,44,y+22,550,38)})}
 function sign(i,w){const s=S[i],h=w*440/640,face=new THREE.MeshStandardMaterial({map:signTex(s,BAY[s.bay%7].ink),roughness:.95}),side=M('#e9dfcb');
  const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[side,side,side,side,face,side]);m.position.y=-h/2-.08;m.castShadow=true;const g=new THREE.Group();g.add(m);
  for(const sx of[-.4,.4]){const th=new THREE.Mesh(new THREE.CylinderGeometry(.005,.005,.11,5),pinkMat);th.position.set(sx*w,-.045,0);g.add(th);const pin=new THREE.Mesh(new THREE.SphereGeometry(.026,12,8),pinkMat);pin.position.set(sx*w,-.1,.02);g.add(pin)}return g}
@@ -554,7 +554,7 @@ const bed=()=>{const g=new THREE.Group(),bs=box(1.0,.1,.5,'#e9e4d8');bs.position
 const pedestal=(b,x,z,cv,sc,sec,card,lab,id)=>{b.add(at(box(.5,.2,.4,'#d9c9ad'),x,z,FLOOR+.1));const k=tag(at(bookModel(cv,sc),x,z,FLOOR+.215),sec,card,lab);k.userData.book=id;b.add(k)};
 const BUILD=[
  /* 1: biblioteca e memória — Conceição Evaristo e Olhos d’Água */
- b=>{floorSector(b,BAY[0].floor);layer(b,.9,'#d3b998',()=>2.3,{n:2});
+ b=>{floorSector(b,BAY[0].floor);layer(b,.9,'#c5d5e2',()=>2.3,{n:2});
   [1.0,1.65].forEach(y=>{b.add(at(box(.78,.04,.2,'#a98962'),0,.82,y));bkRow(b,-.3,.82,y+.02,['#b9563a','#2c5653','#dba941','#8aa27a','#c27a86','#3d4672','#e8735a','#7a8f6a','#c9973f'])});
   b.add(tag(desk(0,1.7,1.3),0,0,'a mesa de escrita'));
   b.add(at(typew(),-.35,1.7,.545,8));b.add(tag(at(bookModel('#2c5653',.8),.3,1.68,.545),0,1,'Olhos d’Água'));
@@ -564,9 +564,9 @@ const BUILD=[
   b.add(sheet(-.3,FLOOR+.003,2.6,.5));b.add(sheet(.1,FLOOR+.003,2.75,-.4,.26,.2,'#efe3c9'));
   finish(b,[0],PAL)},
  /* 2: viagem de ônibus — conto “Maria” */
- b=>{floorSector(b,BAY[1].floor);layer(b,.8,'#e3b48e',()=>2.1,{n:2});sky(b,.9,'#c79a7a',3,.9,1.5);
+ b=>{floorSector(b,BAY[1].floor);layer(b,.8,'#c4d7e5',()=>2.1,{n:2});sky(b,.9,'#dce7ef',3,.9,1.5);
   const holes=[];for(let i=0;i<3;i++){const x0=-.4+i*.27,q=new THREE.Path();q.moveTo(x0,1.0);q.lineTo(x0+.2,1.0);q.lineTo(x0+.2,1.8);q.lineTo(x0,1.8);q.closePath();holes.push(q)}
-  layer(b,.95,'#c9a98a',()=>2.1,{n:2,holes});
+  layer(b,.95,'#d0deea',()=>2.1,{n:2,holes});
   for(const x of[-.45,.45]){const seat=box(.4,.1,.36,'#b8977a');seat.position.y=.45;const sb=box(.4,.5,.06,'#b8977a');sb.position.set(0,.75,-.15);const g=new THREE.Group();g.add(seat,sb);b.add(at(g,x,1.5,FLOOR))}
   const rail=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,1.4,10),M('#9a9a96',.5));rail.rotation.z=Math.PI/2;rail.position.set(0,1.6,1.6);b.add(rail);
   [-.4,0,.4].forEach(x=>{hang(b,{at:v=>new THREE.Vector3(v,1.6,1.6)},x,box(.05,.2,.015,'#c4583f'),.1,{nostring:true,len:.3})});
@@ -577,7 +577,7 @@ const BUILD=[
   const bell=box(.08,.12,.03,'#c4583f');onWall(bell,-1,1.5,1.2,.04);b.add(tag(bell,1,0,'a campainha do ônibus'));
   finish(b,[1],PAL)},
  /* 3: mesa de análise — P.E.N.T.E. */
- b=>{floorSector(b,BAY[2].floor);layer(b,.85,'#d9aea6',()=>2.2,{n:2});
+ b=>{floorSector(b,BAY[2].floor);layer(b,.85,'#c5d5e3',()=>2.2,{n:2});
   const comb=new THREE.Group(),cc=['#c9973f','#8aa27a','#c27a86','#c4583f','#7d8fb0'];comb.add(ext(rect(.64,.1,.2),.03,'#f3e6cf'));cc.forEach((col,i)=>{const t=ext(rect(.09,.2),.03,col);t.position.x=-.24+.12*i;comb.add(t)});
   comb.scale.setScalar(1.9);b.add(tag(at(comb,0,1.55,FLOOR,0),2,0,'o método P.E.N.T.E.'));
   ['P','E','N','T','E'].forEach((Lt,i)=>b.add(tag(at(plaque(Lt,.3,.4,'#f3e6cf','#7d5a30',140),-.6+i*.3,2.55,FLOOR+.2),2,0,['Personagem','Espaço','Narrador','Tempo','Enredo'][i])));
@@ -590,7 +590,7 @@ const BUILD=[
   [-.1,0,.1].forEach(x=>{const dd=ext(circ(.022),.01,'#2a2622');dd.position.set(x,0,.014);bu.add(dd)});onWall(bu,-1,1.45,1.7,.04);b.add(tag(bu,2,0,'o narrador'));
   finish(b,[2],PAL)},
  /* 4: escritório de escritor — Luís Fernando Verissimo */
- b=>{floorSector(b,BAY[3].floor);layer(b,.85,'#d6bf9a',()=>2.25,{n:2});
+ b=>{floorSector(b,BAY[3].floor);layer(b,.85,'#cbd9e5',()=>2.25,{n:2});
   [[-.28,1.5,'ha!','#e8b6a0'],[0,1.9,'?!','#c9d3b0'],[.28,1.45,'rs','#e9d28a']].forEach(([x,y,t,c])=>b.add(tag(at(plaque(t,.22,.28,c,'#7d5a30',90),x,.82,y),3,0,'um rabisco')));
   b.add(tag(desk(0,1.6,1.5),3,0,'a mesa do escritor'));b.add(tag(at(typew(),-.35,1.6,.545,6),3,0,'a máquina de escrever'));
   [0,.1,-.12].forEach((r,i)=>b.add(tag(sheet(.25+i*.03,.55+i*.005,1.6,r,.3,.24,'#e9e1cf'),3,0,'jornais')));
@@ -601,7 +601,7 @@ const BUILD=[
   b.add(tag(at(plaque('LFV',.4,.5,'#f3e6cf','#7d5a30',110),.0,2.55,FLOOR+.25),3,0,'Luís Fernando Verissimo'));
   finish(b,[3],PAL)},
  /* 5: hospital — “O Homem Trocado” */
- b=>{floorSector(b,BAY[4].floor);layer(b,.85,'#cdd5bd',()=>2.2,{n:2});
+ b=>{floorSector(b,BAY[4].floor);layer(b,.85,'#c3d6e2',()=>2.2,{n:2});
   b.add(tag(at(plaque('+',.34,.34,'#f3e6cf','#c0502f',200),0,.8,1.8),4,0,'a cruz do hospital'));
   b.add(tag(at(bed(),0,1.7,FLOOR),4,0,'a maca'));
   [['A/B','#e8b6a0',-.2],['B/A','#e9d28a',.2]].forEach(([t,c,x])=>b.add(tag(at(plaque(t,.2,.14,c,'#7d5a30',70),x,2.0,FLOOR+.28),4,0,'etiqueta trocada')));
@@ -611,7 +611,7 @@ const BUILD=[
   b.add(tag(at(plaque('AN',.3,.4,'#f3e6cf','#7d5a30',120),.6,2.5,FLOOR+.2),4,1,'análise da crônica'));
   finish(b,[4],PAL)},
  /* 6: duas realidades — crítica social */
- b=>{floorSector(b,BAY[5].floor);layer(b,.85,'#d9c9a8',()=>2.2,{n:2});
+ b=>{floorSector(b,BAY[5].floor);layer(b,.85,'#c8d8e5',()=>2.2,{n:2});
   const cab=box(.4,.7,.3,'#b9c0a8');cab.position.y=.35;[.15,.35,.55].forEach(y=>{const dr=box(.34,.02,.02,'#8f9a84');dr.position.set(0,y,.16);cab.add(dr)});b.add(tag(at(cab,-.6,1.5,FLOOR),5,0,'o arquivo da burocracia'));
   [0,1,2,3].forEach(i=>b.add(tag(sheet(-.55+i*.04,FLOOR+.003+i*.005,2.1,i*.4,.3,.22,i%2?'#f5eddb':'#efe3c9'),5,0,'formulários')));
   b.add(tag(at(plaque('+',.26,.26,'#f3e6cf','#c0502f',160),-.5,.8,1.5),5,0,'o hospital'));
@@ -623,7 +623,7 @@ const BUILD=[
   b.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),40,.012,5),M('#e8735a')));
   finish(b,[5],PAL)},
  /* 7: literatura e mundo atual — Nos nossos dias */
- b=>{floorSector(b,BAY[6].floor);layer(b,.8,'#e3d3b5',()=>2.2,{n:2});sky(b,.75,'#c9b595',5,1.3,2.0);sky(b,1.1,'#b69d80',9,.8,1.4);
+ b=>{floorSector(b,BAY[6].floor);layer(b,.8,'#c6d6e3',()=>2.2,{n:2});sky(b,.75,'#dce7ef',5,1.3,2.0);sky(b,1.1,'#cbdce8',9,.8,1.4);
   b.add(tag(at(bookModel('#a8472f',1.9),0,2.1,FLOOR+.02),6,2,'o livro aberto: conclusão'));
   const hp=new THREE.Group(),hpole=box(.04,.7,.04,'#8f9a84');hpole.position.y=.35;const hs=plaque('+',.3,.3,'#f3e6cf','#c0502f',180);hs.position.y=.8;hp.add(hpole,hs);b.add(tag(at(hp,-.7,1.6,FLOOR),6,0,'o hospital'));
   const stop=new THREE.Group(),sp=box(.04,1.0,.04,'#8f9a84');sp.position.y=.5;const pl=plaque('PONTO',.36,.24,'#8aa27a','#f3ead8',60);pl.position.y=1.05;stop.add(sp,pl);b.add(tag(at(stop,.75,1.7,FLOOR),6,1,'o ponto de ônibus'));
@@ -635,7 +635,7 @@ const BUILD=[
 function buildBook(){
  const top=new THREE.Mesh(new THREE.CylinderGeometry(R+.32,R+.32,.02,128),M('#e6dac2'));top.position.y=-.01;top.receiveShadow=true;book.add(top);
  const txt=C.meta.band,bc=document.createElement('canvas'),bx=bc.getContext('2d');bx.font='500 54px "Pixelify Sans"';const tw=Math.ceil(bx.measureText(txt).width);bc.width=tw;bc.height=128;
- bx.fillStyle='#2c5653';bx.fillRect(0,0,tw,128);bx.fillStyle='#d9b46a';bx.font='500 54px "Pixelify Sans"';bx.textBaseline='middle';bx.fillText(txt,0,70);bx.fillRect(0,12,tw,3);bx.fillRect(0,113,tw,3);
+ bx.fillStyle='#536f89';bx.fillRect(0,0,tw,128);bx.fillStyle='#d9b46a';bx.font='500 54px "Pixelify Sans"';bx.textBaseline='middle';bx.fillText(txt,0,70);bx.fillRect(0,12,tw,3);bx.fillRect(0,113,tw,3);
  const bt=new THREE.CanvasTexture(bc);bt.colorSpace=THREE.SRGBColorSpace;bt.wrapS=THREE.RepeatWrapping;bt.repeat.set(Math.max(1,Math.round(TAU*(R+.34)/(.12*tw/128))),1);
  const side=new THREE.Mesh(new THREE.CylinderGeometry(R+.32,R+.36,.12,128,1,true),new THREE.MeshStandardMaterial({map:bt,roughness:.8}));side.position.y=-.06;book.add(side);
  const ps=new THREE.Shape();ps.moveTo(.03,0);ps.lineTo(R,0);ps.lineTo(R,HOUT-.22);ps.quadraticCurveTo(R,HOUT,R-.22,HOUT);ps.bezierCurveTo(R*.58,HOUT+.02,R*.32,H,.03,H);ps.closePath();
@@ -727,7 +727,7 @@ function frameLoop(){
 
 /* ---------- início ---------- */
 (async()=>{try{
- await Promise.race([Promise.all([document.fonts.load('600 40px "Pixelify Sans"'),document.fonts.load('700 30px "Gaegu"')]),new Promise(r=>setTimeout(r,5000))]).catch(()=>{});
+ await Promise.race([Promise.all([document.fonts.load('600 40px "Pixelify Sans"'),document.fonts.load('700 30px "M PLUS Rounded 1c"')]),new Promise(r=>setTimeout(r,5000))]).catch(()=>{});
  __pct(40);buildTable();buildBook();__pct(85);
  renderer.compile(scene,camera);renderPost();__pct(100);
  setTimeout(()=>{window.__ready=window.__booted=true;html.classList.add('ready')},650);
