@@ -8,9 +8,9 @@
 <meta name="description" content="Apresentação interativa de literatura: conto “Maria”, de Conceição Evaristo, e uma crônica de Luís Fernando Veríssimo, pelo método P.E.N.T.E.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&family=Pangolin&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#2a2622;--cream:#f3ead8;--paper:#e9dfcb;--spark:#e8735a;--spark-d:#b9472f;--cloth:#536f89;--ui:#f7f0e2;--pix:'Pixelify Sans',ui-monospace,monospace;--hand:'M PLUS Rounded 1c',Arial,sans-serif;
+:root{--ink:#2a2622;--cream:#f3ead8;--paper:#e9dfcb;--spark:#e8735a;--spark-d:#b9472f;--cloth:#536f89;--ui:#f7f0e2;--pix:'M PLUS Rounded 1c',Arial,sans-serif;--hand:'M PLUS Rounded 1c',Arial,sans-serif;--script:'Pangolin',cursive;
  --rag:url(https://www.vividsites.app/media/flagship/foldworld/tex/rag.jpg)}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:#e5edf3;color:var(--ui);-webkit-tap-highlight-color:transparent}
@@ -71,9 +71,9 @@ html.turned #hint{opacity:0!important}
 .label{position:absolute;top:calc(var(--wy) + var(--wr) + 30px);width:min(640px,88vw);height:236px;background:var(--paper) var(--rag) 0 0/360px;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.35);border-radius:2px;text-align:center}
 .board.l .label{right:calc(.2vw - min(320px,44vw))}.board.r .label{left:calc(.2vw - min(320px,44vw))}
 .label::before{content:"";position:absolute;inset:12px;border:1.5px solid rgba(42,38,34,.35)}
-.label .k{position:absolute;left:0;right:0;top:30px;font:700 19px/1 var(--hand);color:#6f5a3c}
+.label .k{position:absolute;left:0;right:0;top:30px;font:400 19px/1 var(--hand);color:#6f5a3c}
 .label h1{position:absolute;left:0;right:0;top:56px;font:600 clamp(50px,7.6vw,92px)/1 var(--pix);color:var(--ink)}.label h1 i{font-style:normal;color:var(--spark)}
-.label .by{position:absolute;left:0;right:0;top:160px;font:700 21px/1.1 var(--hand)}
+.label .by{position:absolute;left:0;right:0;top:160px;font:400 21px/1.1 var(--script)}
 .pct{position:absolute;left:0;right:0;top:196px;font:500 14px/1 var(--pix);color:#6f5a3c;letter-spacing:.06em}
 .pop{position:absolute;left:50%;top:calc(var(--wy) - 13px);transform:translateX(-50%);display:flex;gap:10px;align-items:flex-end;perspective:300px;z-index:2}
 .pop i{display:block;width:30px;height:24px;clip-path:polygon(50% 0,100% 100%,0 100%);transform-origin:50% 100%;transform:rotateX(84deg);transition:transform .7s cubic-bezier(.3,1.7,.4,1),opacity .6s;background:#c9973f;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
@@ -452,7 +452,7 @@ function ctex(w,h,fn){const cv=document.createElement('canvas');cv.width=w;cv.he
 const nolig=t=>t.replace(/f([ilf])/g,'f\u200c$1');
 function wrap(x,txt,px,py,mw,lh){let l='';for(const w of nolig(txt).split(' ')){const t=l?l+' '+w:w;if(x.measureText(t).width>mw&&l){x.fillText(l,px,py);py+=lh;l=w}else l=t}x.fillText(l,px,py);return py+lh}
 /* placa de papel com texto (letras, rótulos) */
-function plaque(txt,w,h,bg,fg,px){const side=M(bg),face=new THREE.MeshStandardMaterial({roughness:.95,map:ctex(256,Math.round(256*h/w),(x,cw,ch)=>{x.fillStyle=bg;x.fillRect(0,0,cw,ch);x.strokeStyle='rgba(42,38,34,.3)';x.lineWidth=4;x.strokeRect(8,8,cw-16,ch-16);x.fillStyle=fg;x.font='600 '+Math.round(px*256/ (w*300))+'px "Pixelify Sans"';x.textAlign='center';x.textBaseline='middle';x.fillText(nolig(txt),cw/2,ch/2)})});
+function plaque(txt,w,h,bg,fg,px){const side=M(bg),face=new THREE.MeshStandardMaterial({roughness:.95,map:ctex(256,Math.round(256*h/w),(x,cw,ch)=>{x.fillStyle=bg;x.fillRect(0,0,cw,ch);x.strokeStyle='rgba(42,38,34,.3)';x.lineWidth=4;x.strokeRect(8,8,cw-16,ch-16);x.fillStyle=fg;x.font='600 '+Math.round(px*256/ (w*300))+'px "M PLUS Rounded 1c"';x.textAlign='center';x.textBaseline='middle';x.fillText(nolig(txt),cw/2,ch/2)})});
  const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[side,side,side,side,face,side]);m.castShadow=m.receiveShadow=true;return m}
 
 /* ---------- peças do livro ---------- */
@@ -478,7 +478,7 @@ function desk(x,z,w=1.2){const g=new THREE.Group(),t=box(w,.045,.46,'#e5d8bf');t
 
 /* placas penduradas com o título de cada seção */
 function signTex(s,ink){return ctex(640,440,(x,w,h)=>{x.fillStyle='#ece2cd';x.fillRect(0,0,w,h);x.strokeStyle='rgba(42,38,34,.32)';x.lineWidth=3;x.strokeRect(18,18,w-36,h-36);
- x.fillStyle='#b9472f';x.font='500 26px "Pixelify Sans"';x.fillText('SEÇÃO '+s.num,44,76);x.fillStyle=ink;x.font='600 44px "Pixelify Sans"';const y=wrap(x,s.short,44,140,550,52);
+ x.fillStyle='#b9472f';x.font='500 26px "M PLUS Rounded 1c"';x.fillText('SEÇÃO '+s.num,44,76);x.fillStyle=ink;x.font='600 44px "M PLUS Rounded 1c"';const y=wrap(x,s.short,44,140,550,52);
  x.fillStyle='#e8735a';x.fillRect(44,y-30,100,6);x.fillStyle='#2a2622';x.font='700 32px "M PLUS Rounded 1c"';wrap(x,s.sub,44,y+22,550,38)})}
 function sign(i,w){const s=S[i],h=w*440/640,face=new THREE.MeshStandardMaterial({map:signTex(s,BAY[s.bay%7].ink),roughness:.95}),side=M('#e9dfcb');
  const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,.02),[side,side,side,side,face,side]);m.position.y=-h/2-.08;m.castShadow=true;const g=new THREE.Group();g.add(m);
@@ -634,8 +634,8 @@ const BUILD=[
 
 function buildBook(){
  const top=new THREE.Mesh(new THREE.CylinderGeometry(R+.32,R+.32,.02,128),M('#e6dac2'));top.position.y=-.01;top.receiveShadow=true;book.add(top);
- const txt=C.meta.band,bc=document.createElement('canvas'),bx=bc.getContext('2d');bx.font='500 54px "Pixelify Sans"';const tw=Math.ceil(bx.measureText(txt).width);bc.width=tw;bc.height=128;
- bx.fillStyle='#536f89';bx.fillRect(0,0,tw,128);bx.fillStyle='#d9b46a';bx.font='500 54px "Pixelify Sans"';bx.textBaseline='middle';bx.fillText(txt,0,70);bx.fillRect(0,12,tw,3);bx.fillRect(0,113,tw,3);
+ const txt=C.meta.band,bc=document.createElement('canvas'),bx=bc.getContext('2d');bx.font='500 54px "M PLUS Rounded 1c"';const tw=Math.ceil(bx.measureText(txt).width);bc.width=tw;bc.height=128;
+ bx.fillStyle='#536f89';bx.fillRect(0,0,tw,128);bx.fillStyle='#d9b46a';bx.font='500 54px "M PLUS Rounded 1c"';bx.textBaseline='middle';bx.fillText(txt,0,70);bx.fillRect(0,12,tw,3);bx.fillRect(0,113,tw,3);
  const bt=new THREE.CanvasTexture(bc);bt.colorSpace=THREE.SRGBColorSpace;bt.wrapS=THREE.RepeatWrapping;bt.repeat.set(Math.max(1,Math.round(TAU*(R+.34)/(.12*tw/128))),1);
  const side=new THREE.Mesh(new THREE.CylinderGeometry(R+.32,R+.36,.12,128,1,true),new THREE.MeshStandardMaterial({map:bt,roughness:.8}));side.position.y=-.06;book.add(side);
  const ps=new THREE.Shape();ps.moveTo(.03,0);ps.lineTo(R,0);ps.lineTo(R,HOUT-.22);ps.quadraticCurveTo(R,HOUT,R-.22,HOUT);ps.bezierCurveTo(R*.58,HOUT+.02,R*.32,H,.03,H);ps.closePath();
@@ -727,7 +727,7 @@ function frameLoop(){
 
 /* ---------- início ---------- */
 (async()=>{try{
- await Promise.race([Promise.all([document.fonts.load('600 40px "Pixelify Sans"'),document.fonts.load('700 30px "M PLUS Rounded 1c"')]),new Promise(r=>setTimeout(r,5000))]).catch(()=>{});
+ await Promise.race([Promise.all([document.fonts.load('600 40px "M PLUS Rounded 1c"'),document.fonts.load('700 30px "M PLUS Rounded 1c"'),document.fonts.load('400 24px "Pangolin"')]),new Promise(r=>setTimeout(r,5000))]).catch(()=>{});
  __pct(40);buildTable();buildBook();__pct(85);
  renderer.compile(scene,camera);renderPost();__pct(100);
  setTimeout(()=>{window.__ready=window.__booted=true;html.classList.add('ready')},650);
