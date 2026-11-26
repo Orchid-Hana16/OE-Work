@@ -18,13 +18,13 @@ window.CONTENT = {
 
   /* Os 7 ambientes 3D (cores das paredes e pisos: tons suaves de azul; o index.html usa estas mesmas cores). */
   bays: [
-    { wall: "#b4c8dc", floor: "#e1e8ed", ink: "#49647d" },  // 0 divisão 1
-    { wall: "#bdd0e0", floor: "#e5e5e0", ink: "#4d6b82" },  // 1 divisão 2
-    { wall: "#aabdd4", floor: "#dce5eb", ink: "#465f78" },  // 2 divisão 3
-    { wall: "#c3d4e2", floor: "#e5e8eb", ink: "#536b80" },  // 3 divisão 4
-    { wall: "#b0c6d8", floor: "#d9e3e8", ink: "#46677a" },  // 4 divisão 5
-    { wall: "#bacbdc", floor: "#e0e7eb", ink: "#4e687f" },  // 5 divisão 6
-    { wall: "#adc1d6", floor: "#e4e9ed", ink: "#49647d" }   // 6 divisão 7
+    { wall: "#8fa8c3", floor: "#e1e8ed", ink: "#49647d" },  // 0 divisão 1
+    { wall: "#97afc8", floor: "#e5e5e0", ink: "#4d6b82" },  // 1 divisão 2
+    { wall: "#869fbd", floor: "#dce5eb", ink: "#465f78" },  // 2 divisão 3
+    { wall: "#9db5cc", floor: "#e5e8eb", ink: "#536b80" },  // 3 divisão 4
+    { wall: "#8ba7c0", floor: "#d9e3e8", ink: "#46677a" },  // 4 divisão 5
+    { wall: "#93abc5", floor: "#e0e7eb", ink: "#4e687f" },  // 5 divisão 6
+    { wall: "#89a3be", floor: "#e4e9ed", ink: "#49647d" }   // 6 divisão 7
   ],
 
   /* As 8 seções. bay = em qual ambiente 3D ela aparece (0 a 5; 6 volta ao ambiente 0). */
