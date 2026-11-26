@@ -151,8 +151,8 @@ html.colo .pc{opacity:.88}html.nogl .pc{display:none}
 .fold::before{content:"";position:absolute;left:10px;right:10px;bottom:-9px;height:14px;background:var(--paper);border-radius:0 0 4px 4px;box-shadow:0 6px 14px rgba(0,0,0,.25);z-index:-1;transform:translateZ(-1px)}
 
 /* selo de cartão-postal: ~25% da área do cartão. --sw = largura do selo; todas as medidas do selo derivam de --u = --sw/6 */
-#card{--sw:calc(min(520px,90vw)*.42)}
-.stamp{--u:calc(var(--sw)/6);position:absolute;left:calc(var(--sw)*-.11);top:calc(var(--sw)*-.16);width:var(--sw);height:calc(var(--u)*7);transform:rotate(-8deg) translateZ(3px);z-index:5;filter:drop-shadow(0 4px 6px rgba(0,0,0,.38));pointer-events:none;opacity:0;transition:opacity .4s .5s}
+#card{--sw:calc(min(520px,90vw)*.42);--ov:min(calc(var(--sw)*.3),calc(5vw - 4px))}
+.stamp{--u:calc(var(--sw)/6);position:absolute;left:calc(var(--ov)*-1);top:calc(var(--sw)*-.16);width:var(--sw);height:calc(var(--u)*7);transform:rotate(-8deg) translateZ(3px);z-index:5;filter:drop-shadow(0 4px 6px rgba(0,0,0,.38));pointer-events:none;opacity:0;transition:opacity .4s .5s}
 #card.on .stamp{opacity:1}
 .stamp .sf{position:absolute;inset:0;background:#f7f0e0 var(--rag) 0 0/300px;-webkit-mask:radial-gradient(circle calc(var(--u)*.29) at calc(var(--u)/2) calc(var(--u)/2),#0000 calc(var(--u)*.26),#000 calc(var(--u)*.29)) calc(var(--u)/-2) calc(var(--u)/-2)/var(--u) var(--u);mask:radial-gradient(circle calc(var(--u)*.29) at calc(var(--u)/2) calc(var(--u)/2),#0000 calc(var(--u)*.26),#000 calc(var(--u)*.29)) calc(var(--u)/-2) calc(var(--u)/-2)/var(--u) var(--u)}
 .stamp .ph{position:absolute;inset:calc(var(--u)*.57);overflow:hidden;background:#d9cfb8;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
@@ -160,8 +160,8 @@ html.colo .pc{opacity:.88}html.nogl .pc{display:none}
 .stamp .ph.empty{background:repeating-linear-gradient(45deg,#e3d9c1 0 6px,#d9cfb8 6px 12px);display:grid;place-items:center;border:1.5px dashed rgba(42,38,34,.45)}
 .stamp .ph.empty span{font:600 calc(var(--u)*.5) var(--pix);color:#6f5a3c}
 /* o texto não passa por baixo do selo: título deslocado e o corpo contorna o selo */
-#card .half.top{height:auto;min-height:104px;padding-left:calc(var(--sw)*.89 + 14px);padding-bottom:14px}
-.half.bot::before{content:"";float:left;width:calc(var(--sw)*.89 - 12px);height:max(0px,calc(var(--sw)*1.03 - 110px))}
+#card .half.top{height:auto;min-height:104px;padding-left:calc(var(--sw) - var(--ov) + 20px);padding-bottom:14px}
+.half.bot::before{content:"";float:left;width:calc(var(--sw) - var(--ov) - 12px);height:max(0px,calc(var(--sw)*1.03 - 110px))}
 .chip.crt{background:#f6dccd;color:#9a3d27}.chip.crm{background:#d3dcec;color:#2b3b66}
 @media (max-width:560px){#card{--sw:calc(90vw*.5)}}
 /* livro aberto */
@@ -259,7 +259,7 @@ html.colo .pc{opacity:.88}html.nogl .pc{display:none}
 <script src="secoes.js"></script>
 <!-- paleta fria nos ambientes / quente nos detalhes (sobrepõe as cores de conteudo.js sem alterá-lo) -->
 <script>
-(function(){var W=['#b4c8dc','#bdd0e0','#aabdd4','#c3d4e2','#b0c6d8','#bacbdc','#adc1d6'],F=['#e1e8ed','#e5e5e0','#dce5eb','#e5e8eb','#d9e3e8','#e0e7eb','#e4e9ed'],I=['#49647d','#4d6b82','#465f78','#536b80','#46677a','#4e687f','#49647d'],bs=window.CONTENT.bays;
+(function(){var W=['#8fa8c3','#97afc8','#869fbd','#9db5cc','#8ba7c0','#93abc5','#89a3be'],F=['#e1e8ed','#e5e5e0','#dce5eb','#e5e8eb','#d9e3e8','#e0e7eb','#e4e9ed'],I=['#49647d','#4d6b82','#465f78','#536b80','#46677a','#4e687f','#49647d'],bs=window.CONTENT.bays;
 while(bs.length<7)bs.push({});bs.forEach(function(b,i){b.wall=W[i%7];b.floor=F[i%7];b.ink=I[i%7]})})();
 </script>
 
@@ -445,7 +445,17 @@ function M(hex,r=.94){const k=hex+r;if(!mc.has(k))mc.set(k,new THREE.MeshStandar
 const edgeHex=h=>'#'+new THREE.Color(h).lerp(new THREE.Color('#f1e7d3'),.38).getHexString();
 const pinkMat=new THREE.MeshStandardMaterial({color:'#e8735a',roughness:.7,emissive:'#d9583f',emissiveIntensity:.12});
 function rnd(seed){let s=seed*9301+49297;return()=>((s=(s*9301+49297)%233280)/233280)}
-function ext(sh,depth,hex){const g=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:true,bevelThickness:.003,bevelSize:.003,bevelSegments:2,curveSegments:20});g.translate(0,0,-depth/2);const m=new THREE.Mesh(g,[M(hex),M(edgeHex(hex))]);m.castShadow=m.receiveShadow=true;return m}
+/* paredes: tecido de capa em azul. A textura vem de cloth.jpg (a mesma da capa), sem a cor, só o relevo da trama; enquanto não carrega, uma trama desenhada no código */
+const WALLHEX=new Set(),WM_CACHE=new Map();
+const clothCv=document.createElement('canvas');clothCv.width=clothCv.height=512;
+(function(){const x=clothCv.getContext('2d');x.fillStyle='#e9ecf0';x.fillRect(0,0,512,512);for(let i=0;i<64;i++){x.fillStyle=i%2?'rgba(255,255,255,.35)':'rgba(70,90,120,.22)';x.fillRect(0,i*8,512,4);x.fillStyle=i%2?'rgba(70,90,120,.18)':'rgba(255,255,255,.3)';x.fillRect(i*8,0,4,512)}
+ for(let i=0;i<6000;i++){x.fillStyle='rgba(60,80,110,'+Math.random()*.08+')';x.fillRect(Math.random()*512,Math.random()*512,1+Math.random()*2,1+Math.random()*2)}})();
+const clothTex=new THREE.CanvasTexture(clothCv);clothTex.colorSpace=THREE.SRGBColorSpace;clothTex.wrapS=clothTex.wrapT=THREE.RepeatWrapping;clothTex.repeat.set(.9,.9);clothTex.anisotropy=8;
+{const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{try{const x=clothCv.getContext('2d');x.globalCompositeOperation='source-over';x.drawImage(im,0,0,512,512);
+ x.globalCompositeOperation='saturation';x.fillStyle='#808080';x.fillRect(0,0,512,512);x.globalCompositeOperation='lighter';x.fillStyle='rgb(150,150,150)';x.fillRect(0,0,512,512);x.globalCompositeOperation='source-over';clothTex.needsUpdate=true}catch(e){}};
+ im.src='https://www.vividsites.app/media/flagship/foldworld/tex/cloth.jpg'}
+function WM(hex){if(!WM_CACHE.has(hex))WM_CACHE.set(hex,new THREE.MeshStandardMaterial({color:new THREE.Color(hex).multiplyScalar(1.12),map:clothTex,roughness:.95,metalness:0}));return WM_CACHE.get(hex)}
+function ext(sh,depth,hex){const g=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:true,bevelThickness:.003,bevelSize:.003,bevelSegments:2,curveSegments:20});g.translate(0,0,-depth/2);const m=new THREE.Mesh(g,[WALLHEX.has(hex)?WM(hex):M(hex),M(edgeHex(hex))]);m.castShadow=m.receiveShadow=true;return m}
 function box(w,h,d,hex){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),M(hex));m.castShadow=m.receiveShadow=true;return m}
 const rect=(w,h,y0=0)=>{const s=new THREE.Shape();s.moveTo(-w/2,y0);s.lineTo(w/2,y0);s.lineTo(w/2,y0+h);s.lineTo(-w/2,y0+h);s.closePath();return s};
 const poly=p=>{const s=new THREE.Shape();p.forEach(([x,y],i)=>i?s.lineTo(x,y):s.moveTo(x,y));s.closePath();return s};
@@ -476,7 +486,7 @@ function bunting(bay,th,cols,step,skip){const tri=poly([[-.075,0],[.075,0],[0,-.
  for(let x=-th.hw+.12;x<th.hw-.08;x+=step){if(skip.some(([a,b])=>x>a&&x<b))continue;hang(bay,th,x,ext(tri,.008,cols[i++%cols.length]),0,{nostring:true,len:.1})}}
 function floorSector(bay,hex){const s=new THREE.Shape();s.moveTo(0,.02);for(let i=0;i<=24;i++){const a=(-HA+BA*i/24)*D2R;s.lineTo(Math.sin(a)*(R+.01),Math.cos(a)*(R+.01))}s.closePath();
  const g=new THREE.ExtrudeGeometry(s,{depth:FLOOR,bevelEnabled:false,curveSegments:4});g.rotateX(Math.PI/2);g.translate(0,FLOOR,0);
- const m=new THREE.Mesh(g,[M(hex),M(edgeHex(hex))]);m.receiveShadow=true;bay.add(m)}
+ const m=new THREE.Mesh(g,[WALLHEX.has(hex)?WM(hex):M(hex),M(edgeHex(hex))]);m.receiveShadow=true;bay.add(m)}
 function desk(x,z,w=1.2){const g=new THREE.Group(),t=box(w,.045,.46,'#e5d8bf');t.position.y=.5;g.add(t);for(const sx of[-1,1]){const l=box(.04,.48,.42,'#d7c7aa');l.position.set(sx*(w/2-.04),.25,0);g.add(l)}return at(g,x,z,FLOOR)}
 
 /* placas penduradas com o título de cada seção */
@@ -549,7 +559,7 @@ let _glow;
 /* ---------- os 6 ambientes ---------- */
 const PAL=['#e8735a','#f3e6cf','#b8c4a0','#e0a43c'];
 /* parede de fundo de cada cena: sempre derivada do azul da própria baia (BAY[k].wall), levemente clareado */
-const WALL=(k,a=.3)=>{const c=new THREE.Color(BAY[k].wall);c.lerp(new THREE.Color('#eaf2f8'),a);return '#'+c.getHexString()};
+const WALL=(k,a=.12)=>{const c=new THREE.Color(BAY[k].wall);c.lerp(new THREE.Color('#eaf2f8'),a);const h='#'+c.getHexString();WALLHEX.add(h);return h};
 const bkRow=(b,x,z,y,cols)=>cols.forEach((c,i)=>{const h=.2+.07*((i*7)%4),k=box(.045+.01*(i%3),h,.16,c);k.position.set(x+i*.058,y+h/2,z);k.rotation.z=i===cols.length-1?-.25:0;b.add(k)});
 const stack=(cols,w=.4)=>{const g=new THREE.Group();cols.forEach((c,i)=>{const n=box(w-i*.02,.05,.28,c);n.position.y=.025+i*.052;n.rotation.y=(i-1)*.2;g.add(n)});return g};
 const plant=(col='#8aa27a')=>{const g=new THREE.Group(),pot=box(.1,.09,.1,'#c98a63');pot.position.y=.045;g.add(pot);[-.5,0,.5].forEach(a=>{const l=ext(poly([[0,0],[.045,.1],[0,.22],[-.045,.1]]),.012,col);l.position.y=.09;l.rotation.z=a;g.add(l)});return g};
@@ -569,9 +579,9 @@ const BUILD=[
   b.add(sheet(-.3,FLOOR+.003,2.6,.5));b.add(sheet(.1,FLOOR+.003,2.75,-.4,.26,.2,'#efe3c9'));
   finish(b,[0],PAL)},
  /* 2: viagem de ônibus — conto “Maria” */
- b=>{floorSector(b,BAY[1].floor);layer(b,.8,WALL(1),()=>2.1,{n:2});sky(b,.9,'#dce7ef',3,.9,1.5);
+ b=>{floorSector(b,BAY[1].floor);layer(b,.8,WALL(1),()=>2.1,{n:2});sky(b,.9,WALL(1,.2),3,.9,1.5);
   const holes=[];for(let i=0;i<3;i++){const x0=-.4+i*.27,q=new THREE.Path();q.moveTo(x0,1.0);q.lineTo(x0+.2,1.0);q.lineTo(x0+.2,1.8);q.lineTo(x0,1.8);q.closePath();holes.push(q)}
-  layer(b,.95,WALL(1,.5),()=>2.1,{n:2,holes});
+  layer(b,.95,WALL(1,.3),()=>2.1,{n:2,holes});
   for(const x of[-.45,.45]){const seat=box(.4,.1,.36,'#b8977a');seat.position.y=.45;const sb=box(.4,.5,.06,'#b8977a');sb.position.set(0,.75,-.15);const g=new THREE.Group();g.add(seat,sb);b.add(at(g,x,1.5,FLOOR))}
   const rail=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,1.4,10),M('#9a9a96',.5));rail.rotation.z=Math.PI/2;rail.position.set(0,1.6,1.6);b.add(rail);
   [-.4,0,.4].forEach(x=>{hang(b,{at:v=>new THREE.Vector3(v,1.6,1.6)},x,box(.05,.2,.015,'#c4583f'),.1,{nostring:true,len:.3})});
@@ -628,7 +638,7 @@ const BUILD=[
   b.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),40,.012,5),M('#e8735a')));
   finish(b,[5],PAL)},
  /* 7: literatura e mundo atual — Nos nossos dias */
- b=>{floorSector(b,BAY[6].floor);layer(b,.8,WALL(6),()=>2.2,{n:2});sky(b,.75,'#dce7ef',5,1.3,2.0);sky(b,1.1,'#cbdce8',9,.8,1.4);
+ b=>{floorSector(b,BAY[6].floor);layer(b,.8,WALL(6),()=>2.2,{n:2});sky(b,.75,WALL(6,.2),5,1.3,2.0);sky(b,1.1,WALL(6,.08),9,.8,1.4);
   b.add(tag(at(bookModel('#a8472f',1.9),0,2.1,FLOOR+.02),6,2,'o livro aberto: conclusão'));
   const hp=new THREE.Group(),hpole=box(.04,.7,.04,'#8f9a84');hpole.position.y=.35;const hs=plaque('+',.3,.3,'#f3e6cf','#c0502f',180);hs.position.y=.8;hp.add(hpole,hs);b.add(tag(at(hp,-.7,1.6,FLOOR),6,0,'o hospital'));
   const stop=new THREE.Group(),sp=box(.04,1.0,.04,'#8f9a84');sp.position.y=.5;const pl=plaque('PONTO',.36,.24,'#8aa27a','#f3ead8',60);pl.position.y=1.05;stop.add(sp,pl);b.add(tag(at(stop,.75,1.7,FLOOR),6,1,'o ponto de ônibus'));
@@ -645,8 +655,8 @@ function buildBook(){
  const side=new THREE.Mesh(new THREE.CylinderGeometry(R+.32,R+.36,.12,128,1,true),new THREE.MeshStandardMaterial({map:bt,roughness:.8}));side.position.y=-.06;book.add(side);
  const ps=new THREE.Shape();ps.moveTo(.03,0);ps.lineTo(R,0);ps.lineTo(R,HOUT-.22);ps.quadraticCurveTo(R,HOUT,R-.22,HOUT);ps.bezierCurveTo(R*.58,HOUT+.02,R*.32,H,.03,H);ps.closePath();
  for(let j=0;j<NB;j++){const th=(j*BA+HA)*D2R,wg=new THREE.Group();wg.rotation.y=th-Math.PI/2;book.add(wg);
-  const a=new THREE.Mesh(new THREE.ExtrudeGeometry(ps,{depth:T/2,bevelEnabled:false}),[M(BAY[j].wall),M('#efe5d1')]);
-  const c=new THREE.Mesh(new THREE.ExtrudeGeometry(ps,{depth:T/2,bevelEnabled:false}),[M(BAY[(j+1)%NB].wall),M('#efe5d1')]);c.position.z=-T/2;wg.add(a,c)}
+  const a=new THREE.Mesh(new THREE.ExtrudeGeometry(ps,{depth:T/2,bevelEnabled:false}),[WM(BAY[j].wall),M('#efe5d1')]);
+  const c=new THREE.Mesh(new THREE.ExtrudeGeometry(ps,{depth:T/2,bevelEnabled:false}),[WM(BAY[(j+1)%NB].wall),M('#efe5d1')]);c.position.z=-T/2;wg.add(a,c)}
  const sp=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,H,16),M('#2c5653'));sp.position.y=H/2;book.add(sp);
  BUILD.forEach((fn,k)=>fn(bayGroup(k)));
  book.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true}})}
