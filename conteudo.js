@@ -16,14 +16,15 @@ window.CONTENT = {
     band: "ENTRE·LINHAS  ✶  UM LIVRO DE LEITURAS EM OITO PARTES  ✶  LITERATURA  ✶  "
   },
 
-  /* Os 6 ambientes 3D (cores). Não precisa mexer, a não ser nas cores. */
+  /* Os 7 ambientes 3D (cores das paredes e pisos: tons suaves de azul; o index.html usa estas mesmas cores). */
   bays: [
-    { wall: "#c9973f", floor: "#4a7862", ink: "#7a4d14" },  // 0 mesa de trabalho
-    { wall: "#3f7f7b", floor: "#d6c29a", ink: "#24585a" },  // 1 águas / livros
-    { wall: "#3d4672", floor: "#4a4a52", ink: "#2e3766" },  // 2 rua à noite (Maria)
-    { wall: "#9b968a", floor: "#cfc8b8", ink: "#5f5a50" },  // 3 neutro (crônica, provisório)
-    { wall: "#8a5546", floor: "#5a4a44", ink: "#6e3a2e" },  // 4 ônibus (crítica de Maria)
-    { wall: "#a8a396", floor: "#cfc8b8", ink: "#5f5a50" }   // 5 neutro (crônica, provisório)
+    { wall: "#b4c8dc", floor: "#e1e8ed", ink: "#49647d" },  // 0 divisão 1
+    { wall: "#bdd0e0", floor: "#e5e5e0", ink: "#4d6b82" },  // 1 divisão 2
+    { wall: "#aabdd4", floor: "#dce5eb", ink: "#465f78" },  // 2 divisão 3
+    { wall: "#c3d4e2", floor: "#e5e8eb", ink: "#536b80" },  // 3 divisão 4
+    { wall: "#b0c6d8", floor: "#d9e3e8", ink: "#46677a" },  // 4 divisão 5
+    { wall: "#bacbdc", floor: "#e0e7eb", ink: "#4e687f" },  // 5 divisão 6
+    { wall: "#adc1d6", floor: "#e4e9ed", ink: "#49647d" }   // 6 divisão 7
   ],
 
   /* As 8 seções. bay = em qual ambiente 3D ela aparece (0 a 5; 6 volta ao ambiente 0). */
